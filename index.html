@@ -7,7 +7,33 @@
 <meta name="description" content="The Virya60 Protocol — a private, structured 1:1 coaching program for executive and business men ready to rebuild performance, energy and confidence in 60 days.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+
+<!-- Failsafe: guarantees the dark background paints immediately, even before the stylesheet below finishes parsing -->
+<style>html, body { background-color: #14110D; }</style>
+
+<!-- Failsafe: keeps scroll-reveal sections visible if JavaScript is blocked or disabled -->
+<noscript><style>.fade-in { opacity: 1 !important; transform: none !important; } .arc-line-fill { width: 100% !important; height: 100% !important; }</style></noscript>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1340485131273814');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1340485131273814&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <style>
   :root {
     --ink: #14110D;
@@ -30,6 +56,7 @@
   body {
     margin: 0;
     background: var(--ink);
+    background-color: var(--ink);
     color: var(--bone);
     font-family: var(--sans);
     line-height: 1.6;
@@ -154,26 +181,33 @@
   }
   .video-frame {
     aspect-ratio: 16 / 9;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 28px;
-    background:
-      radial-gradient(circle at 50% 40%, rgba(201,146,42,0.10), transparent 60%),
-      linear-gradient(135deg, var(--ink-soft), var(--ink));
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--ink-soft), var(--ink));
   }
+  .video-trigger {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .video-thumb {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.78; transition: opacity .2s ease;
+  }
+  .video-trigger:hover .video-thumb { opacity: 0.92; }
   .play-btn {
+    position: relative; z-index: 1;
     width: 68px; height: 68px; border-radius: 50%;
     border: 1px solid var(--gold);
     display: flex; align-items: center; justify-content: center;
-    background: rgba(201,146,42,0.08);
+    background: rgba(20,17,13,0.6);
+    backdrop-filter: blur(2px);
     color: var(--gold-light);
+    transition: transform .2s ease, background .2s ease;
   }
-  .play-btn svg { width: 22px; height: 22px; }
-  .video-frame .vsl-title {
-    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--bone-dim); text-align: center; padding: 0 24px;
-  }
-  .waveform { display: flex; align-items: flex-end; gap: 3px; height: 28px; }
-  .waveform span { width: 3px; background: var(--gold); border-radius: 2px; opacity: 0.55; }
+  .video-trigger:hover .play-btn { transform: scale(1.08); background: rgba(201,146,42,0.22); }
+  .play-btn svg { width: 22px; height: 22px; margin-left: 2px; }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .video-meta {
     display: flex; align-items: center; justify-content: space-between;
     padding: 16px 24px; border-top: 1px solid var(--line);
@@ -298,27 +332,6 @@
   .filter-col.yes .ico { color: var(--gold); }
   .filter-col.no .ico { color: var(--clay); }
 
-  /* ---------- Coach ---------- */
-  .coach { padding: 100px 0; }
-  .coach-inner { display: grid; grid-template-columns: 280px 1fr; gap: 52px; align-items: start; }
-  @media (max-width: 768px) { .coach-inner { grid-template-columns: 1fr; } }
-  .coach-photo {
-    aspect-ratio: 4 / 5; border-radius: 12px;
-    border: 1px solid var(--line-strong);
-    background: linear-gradient(135deg, var(--ink-card), var(--ink-soft));
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 0.78rem; color: var(--bone-dim);
-    text-align: center; padding: 24px; text-transform: uppercase; letter-spacing: 0.12em;
-  }
-  .coach-content p { color: var(--bone-dim); font-size: 1.02rem; }
-  .coach-content p em { color: var(--bone); font-style: normal; }
-  .coach-credentials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-  .credential-chip {
-    border: 1px solid var(--line-strong); border-radius: 999px; padding: 9px 18px;
-    font-family: var(--mono); font-size: 0.72rem; color: var(--gold-light);
-    text-transform: uppercase; letter-spacing: 0.12em;
-  }
-
   /* ---------- Results ---------- */
   .results {
     padding: 96px 0; background: var(--ink-soft);
@@ -404,13 +417,13 @@
   .copyright { font-family: var(--mono); font-size: 0.72rem; color: var(--bone-dim); opacity: 0.45; }
 </style>
 </head>
-<body>
+<body style="background-color:#14110D;">
 
 <!-- ================= TOPBAR ================= -->
 <header class="topbar">
   <div class="topbar-inner">
     <div class="logo">VIRYA60<span>EXECUTIVE PROTOCOL</span></div>
-    <a href="#strategy-session" class="btn-primary">Apply Now</a>
+    <a href="https://superprofile.bio/vp/thestealthlever-SolutionCall" target="_blank" rel="noopener" class="btn-primary">Apply Now</a>
   </div>
 </header>
 
@@ -423,28 +436,22 @@
       <h1>Reclaim Your<br>Masculinity <em>in 60 Days</em></h1>
       <p class="lede">A confidential, structured reconditioning protocol for men who are done guessing — and ready to rebuild performance, energy and confidence from the inside out.</p>
 
-      <!-- Replace this block with your VSL embed (YouTube / Vimeo / Wistia iframe or a <video> tag) -->
+      <!-- VSL: tap to play. Real link to YouTube guarantees it always works, even if the in-page player can't load -->
       <div class="video-card">
-        <div class="video-frame">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l13 8-13 8V4z"/></svg>
-          </div>
-          <p class="vsl-title">The Truth About Your Performance</p>
-          <div class="waveform" aria-hidden="true">
-            <span style="height:10px"></span><span style="height:18px"></span><span style="height:8px"></span>
-            <span style="height:24px"></span><span style="height:14px"></span><span style="height:20px"></span>
-            <span style="height:9px"></span><span style="height:22px"></span><span style="height:12px"></span>
-            <span style="height:16px"></span><span style="height:7px"></span><span style="height:20px"></span>
-            <span style="height:11px"></span><span style="height:18px"></span><span style="height:9px"></span>
-          </div>
+        <div class="video-frame" id="vslFrame">
+          <a href="https://youtu.be/cE2gU7hvX0U" target="_blank" rel="noopener" class="video-trigger" id="vslTrigger" aria-label="Play: The Truth About Your Performance">
+            <img class="video-thumb" src="https://i.ytimg.com/vi/cE2gU7hvX0U/maxresdefault.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/cE2gU7hvX0U/hqdefault.jpg';">
+            <span class="play-btn" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l13 8-13 8V4z"/></svg>
+            </span>
+          </a>
         </div>
         <div class="video-meta">
           <span class="vm-title">The Truth About Your Performance — Private Briefing</span>
-          <span>15:42</span>
         </div>
       </div>
 
-      <a href="#strategy-session" class="btn-primary">Book Your Virya60 Strategy Session</a>
+      <a href="https://superprofile.bio/vp/thestealthlever-SolutionCall" target="_blank" rel="noopener" class="btn-primary">Book Your Virya60 Strategy Session</a>
 
       <div class="hero-stats">
         <div><strong>60</strong>Day Protocol</div>
@@ -561,28 +568,6 @@
     </div>
   </section>
 
-  <!-- ================= COACH ================= -->
-  <section class="coach">
-    <div class="container">
-      <div class="coach-inner fade-in">
-        <!-- Replace with a real photo of the coach -->
-        <div class="coach-photo">[ Coach Photo ]</div>
-        <div class="coach-content">
-          <p class="eyebrow">Your Coach</p>
-          <h2 style="margin: 14px 0 20px;">[ Coach Name ]</h2>
-          <p>For <em>[X years]</em>, [Coach Name] has worked privately with executive men on performance, energy and longevity. After <em>[brief background — e.g. clinical training, athletic career, or personal turning point]</em>, [he/she] built the Virya60 Protocol — a system designed specifically for men with demanding careers and zero patience for fluff.</p>
-          <p>Every client works directly with [Coach Name] — no assistants, no templates, no auto-generated check-ins.</p>
-          <div class="coach-credentials">
-            <span class="credential-chip">[ Credential 1 ]</span>
-            <span class="credential-chip">[ Credential 2 ]</span>
-            <span class="credential-chip">[ Years Coaching ]</span>
-            <span class="credential-chip">[ Clients Coached ]</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= RESULTS ================= -->
   <!-- Replace each placeholder with a real, verifiable client result — name, title, and specific outcome -->
   <section class="results">
@@ -632,7 +617,7 @@
 
       <p class="scarcity">5 strategy sessions opened per week — to protect the depth of 1:1 coaching</p>
 
-      <a href="#" class="btn-primary">Book Your Strategy Session Now</a>
+      <a href="https://superprofile.bio/vp/thestealthlever-SolutionCall" target="_blank" rel="noopener" class="btn-primary">Book Your Strategy Session Now</a>
     </div>
   </section>
 
@@ -673,7 +658,7 @@
     <div class="container fade-in">
       <h2>Sixty Days From Now, You'll Either Have a Plan — Or Still Be Guessing.</h2>
       <p class="sub">Five strategy sessions open each week. Take one of them.</p>
-      <a href="#strategy-session" class="btn-primary">Book Your Virya60 Strategy Session</a>
+      <a href="https://superprofile.bio/vp/thestealthlever-SolutionCall" target="_blank" rel="noopener" class="btn-primary">Book Your Virya60 Strategy Session</a>
     </div>
   </section>
 
@@ -684,9 +669,9 @@
   <div class="container footer-inner">
     <div class="logo">VIRYA60</div>
     <div class="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Contact</a>
+      <a href="legal.html#privacy">Privacy Policy</a>
+      <a href="legal.html#terms">Terms of Service</a>
+      <a href="legal.html#contact">Contact</a>
     </div>
     <p class="disclaimer">Virya60 is an educational coaching program. It does not provide medical diagnosis, treatment, or advice, and the strategy session is not a substitute for consultation with a licensed physician. If you are currently being treated for a medical condition, continue working with your doctor — this program is designed to complement that care, not replace it. Individual results vary and are not guaranteed.</p>
     <p class="copyright">© 2026 Virya60. All rights reserved.</p>
@@ -713,6 +698,22 @@
     }, { threshold: 0.2 });
 
     targets.forEach(function (el) { observer.observe(el); });
+
+    var vslTrigger = document.getElementById('vslTrigger');
+    var vslFrame = document.getElementById('vslFrame');
+    if (vslTrigger && vslFrame) {
+      vslTrigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/cE2gU7hvX0U?autoplay=1&rel=0';
+        iframe.title = 'The Truth About Your Performance';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        vslFrame.innerHTML = '';
+        vslFrame.appendChild(iframe);
+      });
+    }
   });
 </script>
 
