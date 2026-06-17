@@ -436,7 +436,7 @@ src="https://www.facebook.com/tr?id=1340485131273814&ev=PageView&noscript=1"
       <h1>Reclaim Your<br>Masculinity <em>in 60 Days</em></h1>
       <p class="lede">A confidential, structured reconditioning protocol for men who are done guessing — and ready to rebuild performance, energy and confidence from the inside out.</p>
 
-      <!-- VSL: tap to play. Real link to YouTube guarantees it always works, even if the in-page player can't load -->
+      <!-- VSL: tap opens the video directly on YouTube (in a new tab). Embedding it inline triggers YouTube's "Error 153" when previewed from a local file or unverified domain, so a direct link is the reliable choice here. -->
       <div class="video-card">
         <div class="video-frame" id="vslFrame">
           <a href="https://youtu.be/cE2gU7hvX0U" target="_blank" rel="noopener" class="video-trigger" id="vslTrigger" aria-label="Play: The Truth About Your Performance">
@@ -698,22 +698,6 @@ src="https://www.facebook.com/tr?id=1340485131273814&ev=PageView&noscript=1"
     }, { threshold: 0.2 });
 
     targets.forEach(function (el) { observer.observe(el); });
-
-    var vslTrigger = document.getElementById('vslTrigger');
-    var vslFrame = document.getElementById('vslFrame');
-    if (vslTrigger && vslFrame) {
-      vslTrigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        var iframe = document.createElement('iframe');
-        iframe.src = 'https://www.youtube.com/embed/cE2gU7hvX0U?autoplay=1&rel=0';
-        iframe.title = 'The Truth About Your Performance';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-        vslFrame.innerHTML = '';
-        vslFrame.appendChild(iframe);
-      });
-    }
   });
 </script>
 

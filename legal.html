@@ -299,7 +299,7 @@ src="https://www.facebook.com/tr?id=1340485131273814&ev=PageView&noscript=1"
 </main>
 
 <div class="back-home">
-  <a href="virya60-landing-page.html" class="btn-ghost">← Back to Virya60</a>
+  <a href="virya60-landing-page.html" id="backHome" class="btn-ghost">← Back to Virya60</a>
 </div>
 
 <footer>
@@ -307,6 +307,18 @@ src="https://www.facebook.com/tr?id=1340485131273814&ev=PageView&noscript=1"
     <p class="copyright">© 2026 Virya60. All rights reserved. This website is not affiliated with Google or Facebook.</p>
   </div>
 </footer>
+
+<script>
+  // Prefer returning to whatever page the visitor actually came from (works no matter
+  // what the landing page's final URL/filename ends up being once hosted). Only falls
+  // back to the hardcoded href above if there's no previous page in this tab's history.
+  document.getElementById('backHome').addEventListener('click', function (e) {
+    if (window.history.length > 1) {
+      e.preventDefault();
+      window.history.back();
+    }
+  });
+</script>
 
 </body>
 </html>
